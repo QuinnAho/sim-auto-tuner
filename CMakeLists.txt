@@ -30,7 +30,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 
-include_directories(include)
+# NOTE: Only add include paths here that are needed globally for legacy Jet code
+# New SAT code (sim/, app/) should use target_include_directories instead
 include_directories(external)
 include_directories(external/pybind11/include)
 include_directories(external/Clara/include)
@@ -74,6 +75,9 @@ if (SAT_ENABLE_LEGACY_SRC)
     set(BUILD_GTEST ON CACHE BOOL "" FORCE)
     set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    set(gtest_disable_pthreads OFF CACHE BOOL "" FORCE)
+    # Disable -Werror in googletest to avoid build failures with modern compilers
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error")
     if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/external/googletest/CMakeLists.txt")
         add_subdirectory(external/googletest EXCLUDE_FROM_ALL)
     else()
@@ -90,6 +94,8 @@ if (SAT_ENABLE_LEGACY_SRC)
     endif()
     set(CMAKE_CXX_VISIBILITY_PRESET hidden)
     set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
+    # Add legacy Jet include path (only for legacy src/ code, not new SAT code)
+    include_directories(include)
     foreach(_legacy_dir
             external/cnpy
             external/pystring
