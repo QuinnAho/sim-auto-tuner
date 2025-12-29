@@ -64,25 +64,25 @@
 - [x] Document CLI flags in docs/CLI_REFERENCE.md
 
 ### Phase 7: GitHub Actions CI
-- [ ] Create .github/workflows/ directory
-- [ ] Create ci.yml workflow file
-- [ ] Add Windows build job (MSVC)
-- [ ] Add Linux build job (GCC)
-- [ ] Configure vcpkg caching in CI
-- [ ] Configure build artifact upload
-- [ ] Add build matrix for Debug/Release on both platforms
-- [ ] Test CI workflow (push to trigger)
-- [ ] Verify CI passes on Windows
-- [ ] Verify CI passes on Linux
-- [ ] Add CI status badge to README.md
+- [x] Create .github/workflows/ directory
+- [x] Create ci.yml workflow file
+- [x] Add Windows build job (MSVC)
+- [x] Add Linux build job (GCC)
+- [x] Configure vcpkg caching in CI
+- [x] Configure build artifact upload
+- [x] Add build matrix for Debug/Release on both platforms
+- [x] Test CI workflow (push to trigger)
+- [x] Verify CI passes on Windows
+- [x] Verify CI passes on Linux
+- [x] Add CI status badge to README.md
 
 ### Phase 8: Documentation
-- [ ] Update README.md with new build instructions
-- [ ] Create docs/BUILD.md with detailed build guide
-- [ ] Document vcpkg setup in docs/BUILD.md
-- [ ] Document CMake presets usage
-- [ ] Create docs/DEPENDENCIES.md listing all third-party libraries
-- [ ] Add Machine Summary Blocks to all new files created
+- [x] Update README.md with new build instructions
+- [x] Create docs/BUILD.md with detailed build guide
+- [x] Document vcpkg setup in docs/BUILD.md
+- [x] Document CMake presets usage
+- [x] Create docs/DEPENDENCIES.md listing all third-party libraries
+- [x] Add Machine Summary Blocks to all new files created
 
 ### Validation
 - [ ] Code compiles without warnings on Windows (MSVC)

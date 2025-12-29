@@ -1,10 +1,19 @@
-# SimulationAutoTuner (Based on Fluid Engine Dev - Jet)
+# SimulationAutoTuner
 
 [![CI](https://github.com/QuinnAho/sim-auto-tuner/actions/workflows/ci.yml/badge.svg)](https://github.com/QuinnAho/sim-auto-tuner/actions/workflows/ci.yml) [![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
 
-Jet framework is a fluid simulation engine SDK for computer graphics applications that was created by Doyub Kim as part of the book, ["Fluid Engine Development"](https://www.crcpress.com/Fluid-Engine-Development/Kim/p/book/9781498719926). The code is built on C++11 and can be compiled with most of the commonly available compilers such as g++, clang++, or Microsoft Visual Studio. Jet currently supports macOS (10.10 or later), Ubuntu (14.04 or later), and Windows (Visual Studio 2015 or later). Other untested platforms that support C++11 also should be able to build Jet. The framework also provides Python API for faster prototyping.
+**SimulationAutoTuner** is a modern C++ fluid simulation engine with AI-assisted runtime performance tuning. Built on the foundation of [Fluid Engine Dev (Jet)](https://github.com/doyubkim/fluid-engine-dev) by Doyub Kim, this project extends the framework with:
 
-The latest code is always available from the [`main`](https://github.com/doyubkim/fluid-engine-dev/tree/main) branch. Since the code evolves over time, the latest from the main branch could be somewhat different from the code in the book. To find the version that is consistent with the book, check out the branch [`book-1st-edition`](https://github.com/doyubkim/fluid-engine-dev/tree/book-1st-edition).
+- **AI-based parameter optimization** for real-time performance tuning
+- **Modern C++17 codebase** with CMake 3.23+ and vcpkg dependency management
+- **Cross-platform CI/CD** with GitHub Actions (Windows, Linux)
+- **Production-ready tooling**: clang-format, clang-tidy, spdlog, CLI11
+
+## Project Status
+
+**Active Development** - Currently implementing Milestone 0 (tooling baseline) and Milestone 1 (UI shell).
+
+The legacy Jet simulation code is temporarily disabled while the new SimulationAutoTuner architecture is being established.
 
 ## Key Features
 * Basic math and geometry operations and data structures
@@ -24,70 +33,61 @@ Every simulator has both 2-D and 3-D implementations.
 
 ## Quick Start
 
-You will need CMake to build the code. If you're using Windows, you need Visual Studio 2015 or 2017 in addition to CMake.
+### Prerequisites
 
-First, clone the code:
+- **CMake 3.23+**
+- **C++17 compiler**: MSVC 2022, GCC 9+, or Clang 10+
+- **Ninja build system** (installed automatically on most systems)
+- **Git** (with submodules support)
 
-```
-git clone https://github.com/doyubkim/fluid-engine-dev.git --recursive
-cd fluid-engine-dev
-```
+### Clone the Repository
 
-### Python API
-
-Build and install the package by running
-
-```
-pip install -U .
+```bash
+git clone https://github.com/QuinnAho/sim-auto-tuner.git --recursive
+cd sim-auto-tuner
 ```
 
-Now run some examples, such as:
+### Build (One-Command)
 
-```
-python src/examples/python_examples/smoke_example01.py
-```
+SimulationAutoTuner uses CMake Presets for easy, reproducible builds:
 
-### C++ API
+```bash
+# Configure and build Release
+cmake --preset Release
+cmake --build --preset Release
 
-For macOS or Linux:
-
-```
-mkdir build && cd build && cmake .. && make
-```
-
-For Windows:
-
-```
-mkdir build
-cd build
-cmake .. -G"Visual Studio 14 2015 Win64"
-MSBuild jet.sln /p:Configuration=Release
+# Or for Debug
+cmake --preset Debug
+cmake --build --preset Debug
 ```
 
-Now run some examples, such as:
+**Note**: vcpkg dependencies (spdlog, fmt, CLI11) are automatically downloaded and built on first configure.
 
-```
-bin/hybrid_liquid_sim
-```
+### Run Tests
 
-### Docker
-
-```
-docker pull doyubkim/fluid-engine-dev:latest
+```bash
+# Run CLI test
+./build/Release/bin/sat_cli_test --help
+./build/Release/bin/sat_cli_test --headless --seed 42 --target-ms 16.67
 ```
 
-Now run some examples, such as:
+### Command-Line Options
 
-```
-docker run -it doyubkim/fluid-engine-dev
-[inside docker container]
-/app/build/bin/hybrid_liquid_sim
-```
+SimulationAutoTuner supports the following flags:
 
+- `--headless` - Run without GUI (headless mode)
+- `--seed <N>` - Random seed for deterministic simulation
+- `--target-ms <N>` - Target frame time in milliseconds (default: 16.67 for 60 FPS)
+- `--log-level <level>` - Logging verbosity: trace, debug, info, warn, error, critical
 
-### More Instructions of Building the Code
+See [docs/CLI_REFERENCE.md](docs/CLI_REFERENCE.md) for full documentation.
 
-To learn how to build, test, and install the SDK, please check out [INSTALL.md](https://github.com/doyubkim/fluid-engine-dev/blob/main/INSTALL.md).
+### More Information
+
+- **Detailed Build Guide**: [docs/BUILD.md](docs/BUILD.md) (coming soon)
+- **Architecture Overview**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **Code Style Guide**: [docs/CODING_STYLE.md](docs/CODING_STYLE.md)
+- **Dependencies**: [docs/DEPENDENCIES.md](docs/DEPENDENCIES.md) (coming soon)
 
 ## Documentations
 
