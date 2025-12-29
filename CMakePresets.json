@@ -1,0 +1,73 @@
+{
+  "vendor": {
+    "SimulationAutoTuner": {
+      "machineSummary": {
+        "file": "CMakePresets.json",
+        "purpose": "Defines cross-platform presets integrating vcpkg for SimulationAutoTuner."
+      }
+    }
+  },
+  "version": 5,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "architecture": {
+        "value": "x64"
+      },
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/${presetName}/install",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/external/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_POLICY_VERSION_MINIMUM": "3.5"
+      }
+    },
+    {
+      "name": "Debug",
+      "displayName": "Debug",
+      "description": "Debug configuration with symbols and runtime checks",
+      "inherits": [
+        "base"
+      ]
+    },
+    {
+      "name": "Release",
+      "displayName": "Release",
+      "description": "Optimized Release configuration",
+      "inherits": [
+        "base"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "Debug",
+      "configurePreset": "Debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Release",
+      "configurePreset": "Release",
+      "configuration": "Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "Debug",
+      "configurePreset": "Debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "Release",
+      "configurePreset": "Release",
+      "configuration": "Release"
+    }
+  ]
+}

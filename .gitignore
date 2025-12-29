@@ -95,3 +95,23 @@ packages
 
 # Python
 ENV*
+
+# AI Task System (execution state and progress logs)
+ai/tasks/TASK_*/progress.ndjson
+ai/tasks/current_index.json
+
+# CMake build system
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+out/
+.vs/
+
+# vcpkg
+vcpkg_installed/
+.vcpkg-root
+
+# IDE
+.vscode/
+*.code-workspace

@@ -1,0 +1,73 @@
+{
+  "task_id": "TASK_001_milestone_0_baseline",
+  "title": "Milestone 0 — Repo + Tooling Baseline",
+  "description": "Establish industry-standard repository structure, build system, tooling, and CI/CD pipeline for the SimulationAutoTuner project. This creates the foundation for all future development work.",
+  "created": "2025-12-28T00:00:00Z",
+  "status": "pending",
+  "priority": "critical",
+  "inputs": {
+    "files": [
+      "README.md",
+      "CMakeLists.txt",
+      "ai/AI_EXECUTION_CONTRACT.md",
+      ".claude/project_context.md"
+    ],
+    "context": [
+      "Existing Jet framework structure in src/",
+      "Current CMake setup (may need refactoring)",
+      "Project uses C++11 minimum, targets Windows/Linux/macOS"
+    ]
+  },
+  "outputs": {
+    "expected_files": [
+      "app/",
+      "sim/",
+      "render/",
+      "ai/",
+      "bench/",
+      "tests/",
+      "docs/",
+      "third_party/",
+      "CMakeLists.txt (refactored)",
+      "vcpkg.json",
+      "CMakePresets.json",
+      ".clang-format",
+      ".clang-tidy",
+      ".github/workflows/ci.yml",
+      "third_party/spdlog",
+      "third_party/fmt",
+      "third_party/CLI11"
+    ],
+    "expected_changes": [
+      "Reorganized directory structure",
+      "Modern CMake build system with vcpkg integration",
+      "Code formatting and linting configured",
+      "Logging infrastructure working",
+      "CLI argument parsing functional",
+      "GitHub Actions CI passing on Windows and Linux"
+    ]
+  },
+  "acceptance_criteria": [
+    "Directory structure matches: app/ sim/ render/ ai/ bench/ tests/ docs/ third_party/",
+    "CMake build completes successfully with single command: cmake --preset Release && cmake --build --preset Release",
+    "vcpkg.json manifest exists and dependencies auto-install",
+    "CMakePresets.json defines Debug and Release configurations",
+    ".clang-format file exists and can format code without errors",
+    ".clang-tidy file exists and runs without critical warnings",
+    "spdlog and fmt are integrated and a test log message compiles and runs",
+    "CLI11 is integrated and parses --headless, --seed, --target-ms flags successfully",
+    "GitHub Actions workflow exists at .github/workflows/ci.yml",
+    "CI builds and passes on both Windows and Linux runners",
+    "All code compiles without warnings on both platforms",
+    "No new per-frame allocations introduced in hot paths (N/A for this milestone)",
+    "All third-party dependencies documented in third_party/ or vcpkg.json"
+  ],
+  "notes": [
+    "This is a foundational task - quality and correctness are paramount",
+    "Preserve existing Jet framework code in src/ - don't break it",
+    "The 'ai/' directory already exists with execution contract - don't overwrite",
+    "vcpkg is preferred over manual third-party management for modern dependencies",
+    "Existing external/ directory contains legacy deps (cnpy, pystring) - leave intact",
+    "Focus on making the build 'one command' reproducible"
+  ]
+}

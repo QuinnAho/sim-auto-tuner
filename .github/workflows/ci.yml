@@ -1,0 +1,98 @@
+# <!-- Machine Summary Block -->
+# {"file":".github/workflows/ci.yml","purpose":"GitHub Actions CI workflow for building and testing SimulationAutoTuner on Windows and Linux.","depends_on":["CMakePresets.json","vcpkg.json"],"notes":["Builds Debug and Release configurations","Uses vcpkg for dependency management","Caches vcpkg packages"]}
+
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  VCPKG_BINARY_SOURCES: 'clear;x-gha,readwrite'
+
+jobs:
+  build:
+    name: ${{ matrix.os }} - ${{ matrix.preset }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        preset: [Debug, Release]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Export GitHub Actions cache environment variables
+      uses: actions/github-script@v7
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+    - name: Setup vcpkg (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        if [ ! -f "external/vcpkg/vcpkg" ]; then
+          git clone https://github.com/microsoft/vcpkg.git external/vcpkg
+          ./external/vcpkg/bootstrap-vcpkg.sh
+        fi
+      shell: bash
+
+    - name: Setup vcpkg (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        if (!(Test-Path "external/vcpkg/vcpkg.exe")) {
+          git clone https://github.com/microsoft/vcpkg.git external/vcpkg
+          .\external\vcpkg\bootstrap-vcpkg.bat
+        }
+      shell: pwsh
+
+    - name: Install Linux dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ninja-build
+
+    - name: Setup MSVC (Windows)
+      if: runner.os == 'Windows'
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Install Ninja (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        choco install ninja
+
+    - name: Configure CMake
+      run: cmake --preset ${{ matrix.preset }}
+
+    - name: Build
+      run: cmake --build --preset ${{ matrix.preset }}
+
+    - name: Run CLI test
+      run: |
+        if [ "$RUNNER_OS" == "Linux" ]; then
+          ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test --help
+          ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test --headless --seed 42 --target-ms 16.67
+        else
+          ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test.exe --help
+          ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test.exe --headless --seed 42 --target-ms 16.67
+        fi
+      shell: bash
+
+    - name: Upload build artifacts
+      if: matrix.preset == 'Release'
+      uses: actions/upload-artifact@v4
+      with:
+        name: sat-${{ runner.os }}-${{ matrix.preset }}
+        path: |
+          build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test*
+          build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_app*
+        retention-days: 7

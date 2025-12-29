@@ -1,0 +1,21 @@
+{
+  "task_id": "TASK_ID_HERE",
+  "title": "Brief task title",
+  "description": "Detailed task description",
+  "created": "YYYY-MM-DDTHH:MM:SSZ",
+  "status": "pending",
+  "priority": "normal",
+  "inputs": {
+    "files": [],
+    "context": []
+  },
+  "outputs": {
+    "expected_files": [],
+    "expected_changes": []
+  },
+  "acceptance_criteria": [
+    "Criterion 1: Specific, measurable condition",
+    "Criterion 2: Another testable condition"
+  ],
+  "notes": []
+}

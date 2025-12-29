@@ -1,3 +1,5 @@
+# <!-- Machine Summary Block -->
+# {"file":".clang-format","purpose":"Defines the canonical C++ formatting style for SimulationAutoTuner."}
 ---
 Language:        Cpp
 # BasedOnStyle:  Google

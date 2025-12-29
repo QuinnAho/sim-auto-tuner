@@ -1,0 +1,6 @@
+{"ts":"2025-12-28T00:00:00Z","task_id":"EXAMPLE","event":"task_started","status":"started","agent":"claude-sonnet-4-5"}
+{"ts":"2025-12-28T00:05:00Z","task_id":"EXAMPLE","event":"step_completed","status":"success","agent":"claude-sonnet-4-5","step":"Step description","details":"Brief factual outcome"}
+{"ts":"2025-12-28T00:10:00Z","task_id":"EXAMPLE","event":"step_failed","status":"failed","agent":"claude-sonnet-4-5","step":"Step description","error":"Brief error description"}
+{"ts":"2025-12-28T00:15:00Z","task_id":"EXAMPLE","event":"blocker_encountered","status":"blocked","agent":"claude-sonnet-4-5","details":"Missing information description"}
+{"ts":"2025-12-28T00:20:00Z","task_id":"EXAMPLE","event":"acceptance_failed","status":"failed","agent":"claude-sonnet-4-5","details":"Which criteria failed"}
+{"ts":"2025-12-28T00:25:00Z","task_id":"EXAMPLE","event":"task_completed","status":"completed","agent":"claude-sonnet-4-5"}

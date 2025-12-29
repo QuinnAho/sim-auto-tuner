@@ -1,0 +1,12 @@
+{
+  "$comment": "{\"file\":\"vcpkg.json\",\"purpose\":\"Declares SimulationAutoTuner dependencies for vcpkg manifest mode.\"}",
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "sim-auto-tuner",
+  "version-string": "0.1.0",
+  "description": "Fluid simulation engine baseline manifest for Milestone 0 tooling work.",
+  "dependencies": [
+    "spdlog",
+    "fmt",
+    "cli11"
+  ]
+}

@@ -1,6 +1,6 @@
-# Fluid Engine Dev - Jet
+# SimulationAutoTuner (Based on Fluid Engine Dev - Jet)
 
-[![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE.md) ![Windows](https://github.com/doyubkim/fluid-engine-dev/workflows/Windows/badge.svg) ![Windows-MinGW](https://github.com/doyubkim/fluid-engine-dev/workflows/Windows-MinGW/badge.svg) ![Ubuntu](https://github.com/doyubkim/fluid-engine-dev/workflows/Ubuntu/badge.svg) ![macOS](https://github.com/doyubkim/fluid-engine-dev/workflows/macOS/badge.svg) [![codecov](https://codecov.io/gh/doyubkim/fluid-engine-dev/branch/main/graph/badge.svg)](https://codecov.io/gh/doyubkim/fluid-engine-dev)
+[![CI](https://github.com/QuinnAho/sim-auto-tuner/actions/workflows/ci.yml/badge.svg)](https://github.com/QuinnAho/sim-auto-tuner/actions/workflows/ci.yml) [![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
 
 Jet framework is a fluid simulation engine SDK for computer graphics applications that was created by Doyub Kim as part of the book, ["Fluid Engine Development"](https://www.crcpress.com/Fluid-Engine-Development/Kim/p/book/9781498719926). The code is built on C++11 and can be compiled with most of the commonly available compilers such as g++, clang++, or Microsoft Visual Studio. Jet currently supports macOS (10.10 or later), Ubuntu (14.04 or later), and Windows (Visual Studio 2015 or later). Other untested platforms that support C++11 also should be able to build Jet. The framework also provides Python API for faster prototyping.
 
