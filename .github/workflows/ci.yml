@@ -78,9 +78,11 @@ jobs:
 
     - name: Run CLI test
       run: |
+        # Ninja (Linux) uses single-config: build/Debug/bin/
+        # VS (Windows) uses multi-config: build/Debug/bin/Debug/
         if [ "$RUNNER_OS" == "Linux" ]; then
-          ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test --help
-          ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test --headless --seed 42 --target-ms 16.67
+          ./build/${{ matrix.preset }}/bin/sat_cli_test --help
+          ./build/${{ matrix.preset }}/bin/sat_cli_test --headless --seed 42 --target-ms 16.67
         else
           ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test.exe --help
           ./build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test.exe --headless --seed 42 --target-ms 16.67
@@ -93,6 +95,6 @@ jobs:
       with:
         name: sat-${{ runner.os }}-${{ matrix.preset }}
         path: |
-          build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_cli_test*
-          build/${{ matrix.preset }}/bin/${{ matrix.preset }}/sat_app*
+          build/${{ matrix.preset }}/bin/**/sat_cli_test*
+          build/${{ matrix.preset }}/bin/**/sat_app*
         retention-days: 7
