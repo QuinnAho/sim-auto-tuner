@@ -37,6 +37,9 @@ include_directories(external/Clara/include)
 include_directories(external/tinyobj)
 include_directories(src/examples)
 
+# Disable -Werror for legacy Jet code (has warnings with modern compilers)
+set(JET_WARNINGS_AS_ERRORS OFF CACHE BOOL "Treat warnings as errors in legacy code" FORCE)
+
 include(cmake/TaskingSystemOptions.cmake)
 include(cmake/CompileOptions.cmake)
 
