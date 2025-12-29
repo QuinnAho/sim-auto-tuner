@@ -12,7 +12,9 @@ project(SimulationAutoTuner
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(EXTERNAL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external")
-set(SAT_ENABLE_LEGACY_SRC ON CACHE BOOL "Build legacy Jet modules under src/")
+# Disable legacy Jet code for now - has C++11 compatibility issues with modern GCC
+# Will re-enable after migrating to new SAT architecture
+set(SAT_ENABLE_LEGACY_SRC OFF CACHE BOOL "Build legacy Jet modules under src/")
 option(SAT_ENABLE_PYTHON_BINDINGS "Build pybind11-based Python bindings" OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
